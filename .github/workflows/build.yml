@@ -10,20 +10,19 @@ jobs:
     name: Build
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@latest
       - run: mkdir installer
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@latest
         with:
           node-version: [20.x]
-
       - name: Build
         run: |
           npm i
           npm i --save-dev archiver
           node archiver.js
       - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
+        uses: svenstaro/upload-release-action@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: rutube-downloader.zip
