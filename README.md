@@ -12,7 +12,7 @@
 
 Требуется установленный **[Node.js](https://nodejs.org/en/download/prebuilt-installer)** и **[FFmpeg](https://github.com/ProjectSoft-STUDIONIONS/ffmpegInstaller/releases/latest/download/ffmpeg_install.exe)**
 
-Скачиваем архив репозитория [rutube-downloader-main.zip](archive/refs/heads/main.zip), разархивируем. Проходим в каталог с файлами репозитория, выполняем:
+Скачиваем архив репозитория [rutube-downloader.zip](https://github.com/ProjectSoft-STUDIONIONS/rutube-downloader/releases/latest/download/rutube-downloader.zip), разархивируем. Проходим в каталог с файлами репозитория, выполняем:
 
 ````
 npm run test
