@@ -4,8 +4,7 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"test": "npm i",
-		"build": "npm i && npm i --save-dev jszip"
+		"test": "npm i"
 	},
 	"author": [
 		{
