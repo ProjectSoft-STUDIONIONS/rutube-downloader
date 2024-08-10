@@ -3,26 +3,31 @@ on:
   push:
     tags:
       - "*"
-  release:
-    types: [ created ]
+concurrency:
+  cancel-in-progress: true
 jobs:
   build:
     name: Build
     runs-on: windows-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
     steps:
-      - uses: actions/checkout@latest
-      - run: mkdir installer
+      - name: Get NWJS version
+        run: |
+          echo "Get NWJS version"
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@latest
+        uses: actions/setup-node@v3
         with:
-          node-version: [20.x]
+          node-version: ${{ matrix.node-version }}
       - name: Build
         run: |
           npm i
           npm i --save-dev archiver
           node archiver.js
       - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@latest
+        uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: rutube-downloader.zip
