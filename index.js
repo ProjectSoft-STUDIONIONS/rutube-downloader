@@ -63,23 +63,10 @@ const escapeRegExp = function(text) {
 		function autopadding(v){
 			return ("0" + v).slice(-2);
 		}
-		var s = autopadding(Math.round(value % 60));
-		var m = autopadding(Math.round((value / 60) % 60));
-		var h  = autopadding(Math.round((value / 360) % 24));
+		let s = autopadding(Math.floor((value / 1000) % 60));
+		let m = autopadding(Math.floor((value / 1000 / 60) % 60));
+		let h = autopadding(Math.floor((value / (1000 * 60 * 60)) % 24));
 		return h + ":" + m + ":" + s
-	},
-
-	autopaddingVal = function (value, length, opt){
-		return (opt.autopaddingChar + value).slice(-length);
-	},
-
-	formatBytes = function(bytes, decimals = 2) {
-		if (bytes === 0) return '0 Bt';
-		const k = 1024;
-		const dm = decimals < 0 ? 0 : decimals;
-		const sizes = ['Bt', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-		const i = Math.floor(Math.log(bytes) / Math.log(k));
-		return parseFloat(bytes / Math.pow(k, i)).toFixed(dm) + ' ' + sizes[i];
 	},
 
 	formatBar = function(optionsBar, paramsBar, payloadBar){
@@ -92,11 +79,8 @@ const escapeRegExp = function(text) {
 				optionsBar.barGlue +
 				optionsBar.barIncompleteString.substr(0, incompleteSize);
 		const percentage =  Math.floor(paramsBar.progress * 100) + '';
-		const formatValue = formatBytes(paramsBar.value);
-		const formatTotal = formatBytes(paramsBar.total);
-		const total = formatTotal.length;// params
-		const stopTime = paramsBar.stopTime || Date.now();
-		const elapsedTime = formatTime(Math.round((stopTime - paramsBar.startTime)/1000));
+		const stopTime = parseInt(Date.now());
+		const elapsedTime = formatTime(Math.round((stopTime - paramsBar.startTime)));
 		var barStr = _colors.white('|')
 						+ _colors.cyan(bar + ' ' + autopadding(percentage, 3) + '%')
 						+ " " + _colors.white('|') + " "
@@ -185,12 +169,12 @@ if (urls.length) {
 									if(rs.ok){
 										const f = __dirname + "/video/" + fname;
 										arrFiles.push(f);
-										progress.increment();
 										progress.update(key + 1, {filename: _colors.yellowBright(fname)});
+										progress.increment();
 										await streamPipeline(rs.body, fs.createWriteStream(f));
 									}else{
-										progress.increment();
 										progress.update(key + 1, {filename: _colors.redBright(fname)});
+										progress.increment();
 									}
 									await delay(50);
 								}
@@ -200,11 +184,9 @@ if (urls.length) {
 								console.log(" ");
 								console.log("COMBINING FILES:", _colors.yellowBright(`${arrFiles.length}`), "FILES INTO A", _colors.yellowBright(`"${saveTitle}${ext}"`), "PLEASE WAIT...", "\n");
 								await splitFile.mergeFiles(arrFiles, `${__dirname}/video/${saveTitle}${ext}`);
-
 								console.log(" ");
 								console.log("DELETE FILES:", _colors.yellowBright(`${arrFiles.length}`), "\n");
 								await deleteFiles(/^segment-.*\.ts/, __dirname + '/video');
-
 								console.log("DONE!", "\n");
 								console.log(_colors.cyanBright("Дальше надо делать обработку скаченного файла...))). Будем стараться. Пока всё."));
 								console.log(" ");
