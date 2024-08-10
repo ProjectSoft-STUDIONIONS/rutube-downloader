@@ -1,0 +1,21 @@
+{
+	"name": "rutube-dl",
+	"description": "Скачивание видео с RuTube",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"test": "npm i"
+	},
+	"author": [
+		{
+			"name": "ProjectSoft",
+			"email": "projectsoft2009@yandex.ru"
+		}
+	],
+	"license": "MIT",
+	"dependencies": {
+		"m3u8-parser": "^7.1.0",
+		"node-fetch": "^2.6.1",
+		"split-file": "^2.3.0"
+	}
+}
