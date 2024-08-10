@@ -5,3 +5,9 @@
 /.gitignore export-ignore
 /rutube-dl.sublime-project export-ignore
 /rutube-dl.sublime-workspace export-ignore
+/screen.png export-ignore
+/archiver.js export-ignore
+/*.zip export-ignore
+/*.inf export-ignore
+/*.ini export-ignore
+/*.ico export-ignore
