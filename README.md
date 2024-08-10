@@ -1,16 +1,6 @@
 # Скачивание видео с RuTube
 
-<div class="github-icons">
-	<a href="https://github.com/ProjectSoft-STUDIONIONS/rutube-downloader/releases/latest" target="_blank">
-		<img src="https://img.shields.io/github/v/release/ProjectSoft-STUDIONIONS/rutube-downloader?style=for-the-badge&color=%23007ec6&label=РЕАЛИЗ" alt="Github Latest rutube-downloader">
-	</a>
-	<a href="https://github.com/ProjectSoft-STUDIONIONS/rutube-downloader/blob/master/LICENSE" target="_blank">
-		<img src="https://img.shields.io/github/license/ProjectSoft-STUDIONIONS/rutube-downloader?style=for-the-badge&color=%2397ca00&label=ЛИЦЕНЗИЯ" alt="Github LICENSE rutube-downloader">
-	</a>
-	<a href="https://github.com/ProjectSoft-STUDIONIONS/rutube-downloader/" target="_blank">
-		<img src="https://img.shields.io/github/repo-size/ProjectSoft-STUDIONIONS/rutube-downloader?style=for-the-badge&color=%23007ec6&label=РАЗМЕР РЕПОЗИТОРИЯ" alt="Github Repo">
-	</a>
-</div>
+![GitHub Release](https://img.shields.io/github/v/release/ProjectSoft-STUDIONIONS/rutube-downloader?display_name=release&style=for-the-badge&link=https%3A%2F%2Fgithub.com%2FProjectSoft-STUDIONIONS%2Frutube-downloader%2Freleases) ![GitHub License](https://img.shields.io/github/license/ProjectSoft-STUDIONIONS/rutube-downloader?style=for-the-badge&color=rgb(151%2C%20202%2C%200)&link=https%3A%2F%2Fgithub.com%2FProjectSoft-STUDIONIONS%2Frutube-downloader%3Ftab%3DMIT-1-ov-file%23readme) ![GitHub repo size](https://img.shields.io/github/repo-size/ProjectSoft-STUDIONIONS/rutube-downloader?style=for-the-badge&link=https%3A%2F%2Fgithub.com%2FProjectSoft-STUDIONIONS%2Frutube-downloader) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/ProjectSoft-STUDIONIONS/rutube-downloader/total?style=for-the-badge&color=rgb(151%2C%20202%2C%200)&link=https%3A%2F%2Fgithub.com%2FProjectSoft-STUDIONIONS%2Frutube-downloader%2Freleases%2Flatest%2Fdownload%2Frutube-downloader.zip)
 
 Скачивание видео с RuTube на Node.js
 
