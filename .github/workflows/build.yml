@@ -3,8 +3,6 @@ on:
   push:
     tags:
       - "*"
-concurrency:
-  cancel-in-progress: true
 jobs:
   build:
     name: Build
