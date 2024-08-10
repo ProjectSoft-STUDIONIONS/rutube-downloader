@@ -2,13 +2,13 @@
 
 <div class="github-icons">
 	<a href="https://github.com/ProjectSoft-STUDIONIONS/rutube-downloader/releases/latest" target="_blank">
-		<img src="https://img.shields.io/github/v/release/ProjectSoft-STUDIONIONS/rutube-downloader?style=for-the-badge&amp;color=%23007ec6&amp;label=РЕАЛИЗ" alt="Github Latest rutube-downloader">
+		<img src="https://img.shields.io/github/v/release/ProjectSoft-STUDIONIONS/rutube-downloader?style=for-the-badge&color=%23007ec6&label=РЕАЛИЗ" alt="Github Latest rutube-downloader">
 	</a>
 	<a href="https://github.com/ProjectSoft-STUDIONIONS/rutube-downloader/blob/master/LICENSE" target="_blank">
-		<img src="https://img.shields.io/github/license/ProjectSoft-STUDIONIONS/rutube-downloader?style=for-the-badge&amp;color=%2397ca00&amp;label=ЛИЦЕНЗИЯ" alt="Github LICENSE rutube-downloader">
+		<img src="https://img.shields.io/github/license/ProjectSoft-STUDIONIONS/rutube-downloader?style=for-the-badge&color=%2397ca00&label=ЛИЦЕНЗИЯ" alt="Github LICENSE rutube-downloader">
 	</a>
 	<a href="https://github.com/ProjectSoft-STUDIONIONS/rutube-downloader/" target="_blank">
-		<img src="https://img.shields.io/github/repo-size/ProjectSoft-STUDIONIONS/rutube-downloader?style=for-the-badge&amp;color=%23007ec6&amp;label=РАЗМЕР РЕПОЗИТОРИЯ" alt="Github Repo">
+		<img src="https://img.shields.io/github/repo-size/ProjectSoft-STUDIONIONS/rutube-downloader?style=for-the-badge&color=%23007ec6&label=РАЗМЕР РЕПОЗИТОРИЯ" alt="Github Repo">
 	</a>
 </div>
 
