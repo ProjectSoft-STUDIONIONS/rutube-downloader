@@ -1,7 +1,6 @@
 name: Build and publish
 on:
   push:
-    branches: [ "main" ]
     tags:
       - "*"
 jobs:
@@ -34,6 +33,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: rutube-downloader.zip
-          tag: 1.0.0
+          tag: ${{ github.ref_name }}
           overwrite: true
           file_glob: true
