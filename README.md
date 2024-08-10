@@ -14,7 +14,7 @@
 
 Скачиваем архив репозитория [rutube-downloader.zip](https://github.com/ProjectSoft-STUDIONIONS/rutube-downloader/releases/latest/download/rutube-downloader.zip), разархивируем. Проходим в каталог с файлами репозитория, выполняем:
 
-````
+````bash
 npm run test
 ````
 
@@ -26,7 +26,7 @@ npm run test
 
 Для скачивания видео, к примеру `https://rutube.ru/video/ba1f267bcff6a3529889a6dd08bfb764/`, нужно выполнить следующую команду:
 
-````
+````bash
 node index.js https://rutube.ru/video/ba1f267bcff6a3529889a6dd08bfb764/
 ````
 
