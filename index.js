@@ -142,7 +142,7 @@ if (urls.length) {
 									hideCursor: false,
 									autopadding: true,
 									fps: 5,
-									barsize: 50
+									barsize: 37
 								},{
 									format: formatBar,
 									barCompleteChar: '\u2588',
@@ -153,7 +153,7 @@ if (urls.length) {
 								m3u8Video.end();
 								// Сегменты
 								let segments = m3u8Video.manifest.segments;
-								let key, data = "";
+								let key, data = "", int;
 								// Получаем ссылки сегментов
 								let arrFiles = [];
 								// Забрать расширение сегмента
@@ -164,20 +164,30 @@ if (urls.length) {
 									// Забираем расширение
 									ext = path.extname(segments[key]['uri']);
 									// По сути здесь можно качать и сохранять
-									let fname = 'segment-' + String(key).padStart(10, '0') + ext;
-									let rs = await fetch(urlPrefix + segments[key]['uri']);
-									if(rs.ok){
-										const f = __dirname + "/video/" + fname;
-										arrFiles.push(f);
-										progress.update(key + 1, {filename: _colors.yellowBright(fname)});
-										progress.increment();
-										await streamPipeline(rs.body, fs.createWriteStream(f));
-									}else{
-										progress.update(key + 1, {filename: _colors.redBright(fname)});
-										progress.increment();
+									int = parseInt(key) + 1;
+									let fname = 'segment-' + `${int}`.padStart(10, '0') + ext;
+									try {
+										let rs = await fetch(urlPrefix + segments[key]['uri']);
+										if(rs.ok){
+											const f = __dirname + "/video/" + fname;
+											arrFiles.push(f);
+											progress.update(int, {filename: "   SAVE: " + _colors.yellowBright(fname)});
+											await streamPipeline(rs.body, fs.createWriteStream(f));
+										}else{
+											progress.update(int, {filename: "NO SAVE: " + _colors.redBright(fname)});
+											progress.stop();
+											console.error(_colors.redBright("ПРОВЕРЬТЕ ПОДКЛЮЧЕНИЕ К ИНТЕРНЕТУ"));
+											process.exit(1);
+										}
+									}catch(e){
+										progress.update(int, {filename: "NO SAVE: " + _colors.redBright(fname)});
+										progress.stop();
+										console.error(_colors.redBright("ПРОВЕРЬТЕ ПОДКЛЮЧЕНИЕ К ИНТЕРНЕТУ"));
+										process.exit(1);
 									}
 									await delay(50);
 								}
+								progress.update(int, {filename: " "});
 								await delay(1000);
 								progress.stop();
 								const saveTitle = sanitize(outputTitle);
