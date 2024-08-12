@@ -2,7 +2,8 @@
 	"folders":
 	[
 		{
-			"path": "."
+			"path": ".",
+			"name": "Скачивание видео с RuTube"
 		}
 	]
 }
