@@ -16,7 +16,6 @@ const path = require('node:path');
 const URL = require('node:url');
 const stream = require('node:stream');
 const util = require('node:util');
-const { execFileSync, execSync, spawnSync } = require('node:child_process');
 
 // Установленные
 const fetch = require('node-fetch');
@@ -163,7 +162,7 @@ const escapeRegExp = function(text) {
 										await createDir(__dirname + "/video");
 										await deleteFiles(/^segment-.*\.ts/, __dirname + '/video');
 										console.log(" ");
-										console.log("DOWNLOAD:", outputTitle, "\n");
+										console.log("DOWNLOAD:", _colors.yellowBright(outputTitle), "\n");
 
 										const progress = new cliProgress.SingleBar({
 											stopOnComplete: true,
@@ -232,10 +231,6 @@ const escapeRegExp = function(text) {
 										await execFFmpeg(`${__dirname}/video/${saveTitle}${ext}`, `${__dirname}/video/${saveTitle}.mp4`);
 										console.log(_colors.yellowBright("DONE!"));
 										console.log("\u00A0");
-										console.log(_colors.bgWhite(_colors.white("█████████████████")) + "\u00A0");
-										console.log(_colors.bgRed(_colors.white(" #СвоихНеБросаем ")) + "\u00A0");
-										console.log(_colors.bgBlue(_colors.blue("█████████████████")) + "\u00A0");
-										console.log("\u00A0");
 										resolve(true);
 									})
 							});
@@ -250,7 +245,11 @@ const escapeRegExp = function(text) {
 	if (urls.length) {
 		for(let i = 0; i < urls.length; ++i){
 			url = urls[i];
-			await runDownLoadAndConverting(url)
+			await runDownLoadAndConverting(url);
 		}
 	}
+	console.log(_colors.bgWhite(_colors.white("█████████████████")) + "\u00A0");
+	console.log(_colors.bgRed(_colors.white(" #СвоихНеБросаем ")) + "\u00A0");
+	console.log(_colors.bgBlue(_colors.blue("█████████████████")) + "\u00A0");
+	console.log("\u00A0");
 }());
