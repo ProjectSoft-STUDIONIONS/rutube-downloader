@@ -2,13 +2,15 @@
  * 
  * Первый параметр при запуске скрипта должен быть url видео
  * Пример:
- * node index.js https://rutube.ru/video/f07ab06594523b8b520962123bd5f906/
+ * node index.js https://rutube.ru/video/bb2a7557a09fbe3d63f74dd98aef3551/
  * 
  */
 if(!process.argv[2]){
 	console.error('NOT URL ARGUMENT');
 	process.exit();
 }
+
+const urls = process.argv.slice(2);
 
 // NodeJS
 const fs = require('node:fs');
@@ -26,9 +28,9 @@ const _colors = require('ansi-colors');
 const sanitize = require('sanitize-filename');
 const ffmpeg = require('ffmpeg');
 
-const regex_rutube = /^https?:\/\/rutube\.ru\/video\/(\w+)/;
+const processTitle = process.title;
 
-const urls = process.argv.slice(2);
+const regex_rutube = /^https?:\/\/rutube\.ru\/video\/(\w+)/;
 
 const streamPipeline = util.promisify(stream.pipeline);
 
@@ -121,13 +123,13 @@ const escapeRegExp = function(text) {
 	execFFmpeg = async function (input, output) {
 		return new Promise((resolve, reject) => {
 			const child = require('node:child_process')
-				.exec(`ffmpeg -i "${input}" "${output}"`);
+				.exec(`ffmpeg -i "${input}" -vcodec copy -acodec copy "${output}"`);
 			child.stdout.pipe(process.stdout);
 			child.on('exit', () => {
 				resolve(true);
 			});
 		})
-	}
+	},
 
 	runDownLoadAndConverting = async function(_url) {
 		return new Promise((resolve, reject) => {
@@ -144,6 +146,7 @@ const escapeRegExp = function(text) {
 						fetch(video_m3u8)
 							.then(res => res.text())
 							.then(text => {
+								process.title = "DOWNLOAD: " + outputTitle;
 								let parser = new m3u8Parser.Parser();
 								parser.push(text);
 								parser.end();
@@ -162,8 +165,7 @@ const escapeRegExp = function(text) {
 										await createDir(__dirname + "/video");
 										await deleteFiles(/^segment-.*\.ts/, __dirname + '/video');
 										console.log(" ");
-										console.log("DOWNLOAD:", _colors.yellowBright(outputTitle), "\n");
-
+										console.log("       DOWNLOAD:", _colors.yellowBright(outputTitle), "\n");
 										const progress = new cliProgress.SingleBar({
 											stopOnComplete: true,
 											hideCursor: false,
@@ -221,16 +223,21 @@ const escapeRegExp = function(text) {
 										console.log("\u00A0");
 										console.log("COMBINING FILES:", _colors.yellowBright(`${arrFiles.length}`), "FILES INTO A", _colors.yellowBright(`"${saveTitle}${ext}"`), "PLEASE WAIT...", "\n");
 										await splitFile.mergeFiles(arrFiles, `${__dirname}/video/${saveTitle}${ext}`);
-										console.log("\u00A0");
-										console.log("DELETE FILES:", _colors.yellowBright(`${arrFiles.length}`), "\n");
+										//console.log("\u00A0");
+										console.log("   DELETE FILES:", _colors.yellowBright(`${arrFiles.length}`), "\n");
 										await deleteFiles(/^segment-.*\.ts/, __dirname + '/video');
 										await deleteFile(`${__dirname}/video/${saveTitle}.mp4`);
-										console.log("\u00A0");
-										console.log("CONVERTING", _colors.yellowBright(`"${saveTitle}${ext}"`), "TO", _colors.yellowBright(`"${saveTitle}.mp4"`),"PLEASE WAIT...");
+										//console.log("\u00A0");
+										console.log("     CONVERTING:", _colors.yellowBright(`"${saveTitle}${ext}"`));
+										console.log("             TO:", _colors.yellowBright(`"${saveTitle}.mp4"`))
+										console.log("PLEASE WAIT...");
 										console.log("\u00A0");
 										await execFFmpeg(`${__dirname}/video/${saveTitle}${ext}`, `${__dirname}/video/${saveTitle}.mp4`);
+										await deleteFile(`${__dirname}/video/${saveTitle}${ext}`);
+										console.clear();
 										console.log(_colors.yellowBright("DONE!"));
-										console.log("\u00A0");
+										console.log("_".padEnd(20, "_"));
+										//console.log("\u00A0");
 										resolve(true);
 									})
 							});
@@ -248,8 +255,11 @@ const escapeRegExp = function(text) {
 			await runDownLoadAndConverting(url);
 		}
 	}
-	console.log(_colors.bgWhite(_colors.white("█████████████████")) + "\u00A0");
-	console.log(_colors.bgRed(_colors.white(" #СвоихНеБросаем ")) + "\u00A0");
-	console.log(_colors.bgBlue(_colors.blue("█████████████████")) + "\u00A0");
+	console.clear();
+	process.title = __dirname;
+	console.log("\u00A0");
+	console.log("\u00A0\u00A0\u00A0" + _colors.bgWhite(_colors.white("█████████████████")) + "\u00A0");
+	console.log("\u00A0\u00A0\u00A0" + _colors.bgRed(_colors.white(" #СвоихНеБросаем ")) + "\u00A0");
+	console.log("\u00A0\u00A0\u00A0" + _colors.bgBlue(_colors.blue("█████████████████")) + "\u00A0");
 	console.log("\u00A0");
 }());
