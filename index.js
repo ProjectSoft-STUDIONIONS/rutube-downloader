@@ -26,7 +26,6 @@ const splitFile = require('split-file');
 const cliProgress = require('cli-progress');
 const _colors = require('ansi-colors');
 const sanitize = require('sanitize-filename');
-const ffmpeg = require('ffmpeg');
 
 const processTitle = process.title;
 
