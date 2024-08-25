@@ -35,11 +35,7 @@ const streamPipeline = util.promisify(stream.pipeline);
 
 let m, pls, url;
 
-const escapeRegExp = function(text) {
-		return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-	},
-
-	createDir = function(dir) {
+const createDir = function(dir) {
 		return new Promise((resolve, reject) => {
 			fs.access(dir, function(err) {
 				if (err && err.code === 'ENOENT') {
@@ -122,7 +118,7 @@ const escapeRegExp = function(text) {
 	execFFmpeg = async function (input, output) {
 		return new Promise((resolve, reject) => {
 			const child = require('node:child_process')
-				.exec(`ffmpeg -i "${input}" -vcodec copy -acodec copy "${output}"`);
+				.exec(`ffmpeg -hide_banner -y -i "${input}" -vcodec copy -acodec copy "${output}"`);
 			child.stdout.pipe(process.stdout);
 			child.on('exit', () => {
 				resolve(true);
@@ -205,12 +201,14 @@ const escapeRegExp = function(text) {
 													progress.update(int, {filename: "NO SAVE: " + _colors.redBright(fname)});
 													progress.stop();
 													console.error(_colors.redBright("ПРОВЕРЬТЕ ПОДКЛЮЧЕНИЕ К ИНТЕРНЕТУ"));
+													reject(true);
 													process.exit(1);
 												}
 											}catch(e){
 												progress.update(int, {filename: "NO SAVE: " + _colors.redBright(fname)});
 												progress.stop();
 												console.error(_colors.redBright("ПРОВЕРЬТЕ ПОДКЛЮЧЕНИЕ К ИНТЕРНЕТУ"));
+												reject(true);
 												process.exit(1);
 											}
 											await delay(50);
