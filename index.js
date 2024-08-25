@@ -222,8 +222,12 @@ const createDir = function(dir) {
 										console.log("             TO:", _colors.yellowBright(`"${saveTitle}.mp4"`))
 										console.log("PLEASE WAIT...");
 										console.log("\u00A0");
-										await execFFmpeg(`${__dirname}/video/${saveTitle}${ext}`, `${__dirname}/video/${saveTitle}.mp4`);
-										await deleteFile(`${__dirname}/video/${saveTitle}${ext}`);
+										try {
+											await execFFmpeg(`${__dirname}/video/${saveTitle}${ext}`, `${__dirname}/video/${saveTitle}.mp4`);
+											await deleteFile(`${__dirname}/video/${saveTitle}${ext}`);
+										}catch(e){
+											console.log(e);
+										}
 										console.clear();
 										console.log(_colors.yellowBright("DONE!"));
 										console.log("_".padEnd(20, "_"));
