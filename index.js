@@ -10,8 +10,9 @@ if(!process.argv[2]){
 	process.exit();
 }
 
-const urls = process.argv.slice(2);
-
+let urls = process.argv.slice(2);
+//console.log(urls);
+//process.exit(0);
 // NodeJS
 const fs = require('node:fs');
 const path = require('node:path');
@@ -238,8 +239,8 @@ const createDir = function(dir) {
 
 (async function(){
 	if (urls.length) {
-		for(let i = 0; i < urls.length; ++i){
-			url = urls[i];
+		while(urls.length) {
+			url = urls.shift();
 			await runDownLoadAndConverting(url);
 		}
 	}
