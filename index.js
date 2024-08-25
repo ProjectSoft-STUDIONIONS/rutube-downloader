@@ -106,13 +106,6 @@ const createDir = function(dir) {
 		return barStr;
 	},
 
-	rightpad = function(str, len, ch = false) {
-		str = String(str);
-		if (!ch && ch !== 0)
-			ch = ' ';
-		return str.padEnd(len, ch);
-	},
-
 	delay = ms => new Promise(resolve => setTimeout(resolve, ms)),
 
 	execFFmpeg = async function (input, output) {
@@ -220,7 +213,6 @@ const createDir = function(dir) {
 										console.log("\u00A0");
 										console.log("COMBINING FILES:", _colors.yellowBright(`${arrFiles.length}`), "FILES INTO A", _colors.yellowBright(`"${saveTitle}${ext}"`), "PLEASE WAIT...", "\n");
 										await splitFile.mergeFiles(arrFiles, `${__dirname}/video/${saveTitle}${ext}`);
-										//console.log("\u00A0");
 										console.log("   DELETE FILES:", _colors.yellowBright(`${arrFiles.length}`), "\n");
 										await deleteFiles(/^segment-.*\.ts/, __dirname + '/video');
 										await deleteFile(`${__dirname}/video/${saveTitle}.mp4`);
@@ -234,7 +226,6 @@ const createDir = function(dir) {
 										console.clear();
 										console.log(_colors.yellowBright("DONE!"));
 										console.log("_".padEnd(20, "_"));
-										//console.log("\u00A0");
 										resolve(true);
 									})
 							});
