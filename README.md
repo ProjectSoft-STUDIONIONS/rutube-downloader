@@ -30,5 +30,11 @@ npm run test
 node index.js https://rutube.ru/video/ba1f267bcff6a3529889a6dd08bfb764/
 ````
 
+Так же можно выполнить множнственное скачивание видео:
+
+````bash
+node index.js https://rutube.ru/video/ba1f267bcff6a3529889a6dd08bfb764/ https://rutube.ru/video/1c62a5d0f5a87bd2028a5e81eb1d70ba/ https://rutube.ru/video/3219fef0568d88d9bcd4567aef9fc1ea/
+````
+
 Результат выполнения виден на скриншоте. Видео сохраняется в папке `video` расположенной в директории рядом с исполняемым скриптом.
 
