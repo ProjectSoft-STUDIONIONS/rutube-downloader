@@ -88,12 +88,5 @@ run()
 	.finally(() => {
 		rl.close();
 		process.title = globalTitle;
-		/**
-		 * Код ниже удалять запрещено!
-		 */
-		console.log("\u00A0");
-		console.log("\u00A0\u00A0\u00A0" + _colors.bgWhite( _colors.white("\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588")) + "\u00A0");
-		console.log("\u00A0\u00A0\u00A0" + _colors.bgBlue(  _colors.white("\u0020\u0023\u0421\u0432\u043e\u0438\u0445\u041d\u0435\u0411\u0440\u043e\u0441\u0430\u0435\u043c\u0020")) + "\u00A0");
-		console.log("\u00A0\u00A0\u00A0" + _colors.bgRed(   _colors.red(  "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588")) + "\u00A0");
 		console.log("\u00A0");
 	});
