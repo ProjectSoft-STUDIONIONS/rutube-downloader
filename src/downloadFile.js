@@ -72,9 +72,6 @@ exports.downloadFile = async function (cfg, segments, options) {
 				existsCount(arrFiles),
 				joinNames(activeSegmentsNums)
 			);
-			if (typeof cfg.onProgress === "function") {
-				cfg.onProgress({ stage: "segments", current: existsCount(arrFiles), total: segments.length });
-			}
 
 			const error = await downloadSegment(
 				segmentUrl,
@@ -99,9 +96,6 @@ exports.downloadFile = async function (cfg, segments, options) {
 				existsCount(arrFiles),
 				joinNames(activeSegmentsNums)
 			);
-			if (typeof cfg.onProgress === "function") {
-				cfg.onProgress({ stage: "segments", current: existsCount(arrFiles), total: segments.length });
-			}
 			await delay(50);
 		}
 	);
@@ -109,8 +103,6 @@ exports.downloadFile = async function (cfg, segments, options) {
 	progress.update(existsCount(arrFiles), { filename: " " });
 	await delay(1000);
 	progress.stop();
-
-	if (typeof cfg.onProgress === "function") cfg.onProgress({ stage: "merge" });
 
 	const saveTitle = cfg.title;
 	const ext = path.extname(segments[0]);
@@ -141,7 +133,6 @@ exports.downloadFile = async function (cfg, segments, options) {
 	const videoFileName = `${saveTitle}.mp4`;
 	const videoFilePath = path.join(cfg.video, videoFileName);
 	await deleteFile(videoFilePath);
-	if (typeof cfg.onProgress === "function") cfg.onProgress({ stage: "convert" });
 	console.log(
 		"CONVERTING:".padStart(configure.padText, " "),
 		_colors.yellowBright(`${saveTitle}${ext}`)
